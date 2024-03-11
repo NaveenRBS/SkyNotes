@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyNotes</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+
+    <div class="navbar">
+        <h1>SkyNotes</h1>
+        <a href="{{url_for('login')}}"  id="login" class="Login"> Login </a>
+        <a href="{{url_for('signup')}}"  id="login" class="Login signup"> Sign-up </a>
+
+    </div> 
+
+    {% with message = get_flashed_messages(with_categories = false) %}
+        {% if message %}
+            {% for messages in message %}
+            {{messages}}
+            {% endfor%}
+        {% endif%}
+    {% endwith %}
+
+    <P class="welcome"><big> SkyNotes </big> Simplify your note-taking experience <br>access your notes from anywhere. <a href="{{url_for('login')}}" class="homelogin"> Log in </a> or <a href="{{url_for('signup')}}"> sign up </a> now to start organizing your ideas effortlessly.</P>
+    
+</body>
+</html>
+

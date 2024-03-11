@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyNotes</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+
+    <div class="navbar">
+        <h1>SkyNotes</h1>
+    </div>
+
+    {% with message = get_flashed_messages(with_categories = false) %}
+        {% if message %}
+            {% for messages in message %}
+            {{messages}}
+            {% endfor%}
+        {% endif%}
+    {% endwith %}
+
+    <div class=" popup-overlay newuser"></div>
+
+    <div class="popup-box loginpage">
+        <center>
+            <h2> Login </h2>
+        <form action="/login" method="POST">      
+            <input type="text" name='usermail' placeholder="Gmail" class="note-title-input" required >
+            <input type="password" name='password' placeholder="Password" class="note-title-input" required >
+            {% if password_incorrect %}
+            <p class="error-msg">Incorrect password. Please try again.</p>
+            {% endif %}
+            <a href="" class="forgotpassword" >forgotPassword?</a>
+            <button type="submit" onclick="add(event)" > Login </button>
+            <a href="{{url_for('signup')}}" class="forgotpassword">Don't have an account?</a>
+            <a href="{{url_for('home')}}" class="close"> X </a>   
+        </form> 
+        </center>
+    </div>
+
+</body>
+</html>
+

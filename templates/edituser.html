@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyNotes</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+
+    <div class="navbar">
+        <h1>SkyNotes</h1>
+    </div>
+
+    <div class=" popup-overlay newuser"></div>
+  
+    <div class="popup-box edituser">
+        <h2> Edit Note </h2>
+        <form action="" method="POST">
+            <input type="text" value="{{datas.title}}" name='title' id="note-title-input">
+            <textarea name="note" id="note-description-input">{{datas.note}} </textarea>
+            <button type="submit" id="add-note" onclick="add(event)"> Update </button>
+           <a href="{{url_for('home')}}"><button type="button" id="cancel-popup">Cancel</button></a> 
+        </form> 
+    </div>
+
+</body>
+</html>
+
