@@ -12,11 +12,20 @@ app.secret_key = '12345'
 app.permanent_session_lifetime = timedelta(days=7)
 
 # MySQL configurations (override with Railway ENV vars)
-app.config["MYSQL_HOST"] = "localhost"
+# app.config["MYSQL_HOST"] = "localhost"
+# app.config["MYSQL_USER"] = "root"
+# app.config["MYSQL_PASSWORD"] = "NaveenRBS"
+# app.config["MYSQL_DB"] = "skynotes"
+# app.config["MYSQL_CURSORCLASS"] = "DictCursor"
+
+# Railway MySQL configuration
+app.config["MYSQL_HOST"] = "turntable.proxy.rlwy.net"
+app.config["MYSQL_PORT"] = 52532
 app.config["MYSQL_USER"] = "root"
-app.config["MYSQL_PASSWORD"] = "NaveenRBS"
-app.config["MYSQL_DB"] = "skynotes"
+app.config["MYSQL_PASSWORD"] = "xKaFXsDMnUVqxUsDdpXmYQfXuzwbBraQ"
+app.config["MYSQL_DB"] = "railway"
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"
+
 
 # Connect manually with MySQLdb (not Flask-MySQLdb anymore)
 def get_mysql_connection():
