@@ -3,6 +3,11 @@ from datetime import timedelta
 from flask_mysqldb import MySQL
 from werkzeug.security import check_password_hash, generate_password_hash
 
+import pymysql
+pymysql.install_as_MySQLdb()
+
+
+
 app = Flask(__name__)
 app.secret_key = '12345'
 app.permanent_session_lifetime = timedelta(days=7)
