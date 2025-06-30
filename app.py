@@ -19,7 +19,8 @@ app.permanent_session_lifetime = timedelta(days=7)
 # app.config["MYSQL_CURSORCLASS"] = "DictCursor"
 
 # Railway MySQL configuration
-app.config["MYSQL_HOST"] = "turntable.proxy.rlwy.net"
+
+app.config["MYSQL_HOST"] = "mysql.railway.internal"
 app.config["MYSQL_PORT"] = 52532
 app.config["MYSQL_USER"] = "root"
 app.config["MYSQL_PASSWORD"] = "xKaFXsDMnUVqxUsDdpXmYQfXuzwbBraQ"
