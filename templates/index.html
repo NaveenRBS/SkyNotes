@@ -4,41 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkyNotes</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
 </head>
 <body>
 
     <div class="navbar">
         <h1>SkyNotes</h1>
         <!-- <a href="{{url_for('login')}}"  id="login" class="Login"  > Login |</a>   -->
-
-        
         <a href="{{url_for('logout')}}" id="signup" class="Login logout" > Logout </a>  
-
     </div> 
 
-
-
-    {% with message = get_flashed_messages(with_categories = false) %}
+    <!-- {% with message = get_flashed_messages(with_categories = false) %}
         {% if message %}
-            {% for messages in message %}
-            {{messages}}
-            {% endfor%}
+             {% for messages in message %} 
+            <div class="flash"> {{message[0]}} <a class="flash-close">X</a></div>
+           {% endfor%} 
         {% endif%}
-    {% endwith %}
+    {% endwith %} -->
 
     <div class="container" >
+       
        {% for data in datas %}
-        <div class="note-container" >
-            <a href="{{url_for('editnote',id=data.note_id)}}" class="edit"> 
-              <h2 >{{ data.title }}</h2>
-              <!-- <p>{{ data.note }}</p> -->
-              <a href="{{url_for('deletenote',id=data.note_id)}}"> <button type="button" class="delete"> Delete </button></a>
-            </a>
+        
+        <div class="note-container" > 
+        <a href="{{url_for('editnote',user=data.user_id,id=data.note_id)}}"  class="edit">
+              <h2 id="note-title">{{ data.title }}</h2>
+              <p id="notes">{{ data.note }}</p>
+              <a href="{{url_for('deletenote',user=data.user_id,id=data.note_id)}}"> <button type="button" class="delete"><img src="{{ url_for('static', filename='img/delete (2).png') }}" alt="Delete"></button></a>
+        </a >
         </div>
         {% endfor %}
+
     </div>
    
     <div>
@@ -49,15 +45,20 @@
 
     <div class="popup-box">
         <h2>Add Note</h2>
-        <form action="" method="POST">
-            <input type="text" placeholder="Title" name="title" id="note-title-input" required>
-            <textarea placeholder="Note" name="note" id="note-description-input" required></textarea>
-            <button type="submit" id="add-note" onclick="add(event)">Add </button>
+        <form action="" method="POST" class="popup-form">
+            <input type="text" placeholder="Title" name="title" id="note-title-input" >
+            <textarea placeholder="Note" name="note" id="note-description-input" ></textarea>
+            <button type="submit" id="add-note" >Add </button>
             <button type="button"  id="cancel-popup">Cancel</button>
         </form> 
-    </div>
+    </div> 
 
 
 </body>
+
+<script src="{{ url_for('static', filename='jquery-3.7.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='jquery.validate.min.js') }}"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </html>
 

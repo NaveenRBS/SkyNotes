@@ -6,7 +6,6 @@
     <title>SkyNotes</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
 
@@ -27,20 +26,28 @@
     <div class="popup-box loginpage">
         <center>
             <h2> Login </h2>
-        <form action="/login" method="POST">      
-            <input type="text" name='usermail' placeholder="Gmail" class="note-title-input" required >
-            <input type="password" name='password' placeholder="Password" class="note-title-input" required >
+        <form action="/login" method="POST" id="login-form">      
+            <input type="email" name='usermail' placeholder="Gmail" class="note-title-input" value="{{useremail}}"  >
+            <input type="password" name='password' placeholder="Password" class="note-title-input" >
             {% if password_incorrect %}
             <p class="error-msg">Incorrect password. Please try again.</p>
             {% endif %}
+            {% if alreadysignuped %}
+            <p class="error-msg"> User Already Signuped .</p>
+            {% endif %}
             <a href="" class="forgotpassword" >forgotPassword?</a>
-            <button type="submit" onclick="add(event)" > Login </button>
+            <button type="submit" > Login </button>
             <a href="{{url_for('signup')}}" class="forgotpassword">Don't have an account?</a>
-            <a href="{{url_for('home')}}" class="close"> X </a>   
+            <a href="{{url_for('home')}}" class="close"> <img src="{{url_for('static',filename='img/close.png')}}" alt="X"> </a>   
         </form> 
         </center>
     </div>
 
 </body>
+
+<script src="{{ url_for('static', filename='jquery-3.7.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='jquery.validate.min.js') }}"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </html>
 

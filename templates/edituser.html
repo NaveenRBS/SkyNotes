@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkyNotes</title>
-
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </head>
 <body>
 
@@ -18,14 +17,19 @@
   
     <div class="popup-box edituser">
         <h2> Edit Note </h2>
-        <form action="" method="POST">
+        <form action="" method="POST" class="popup-form">
             <input type="text" value="{{datas.title}}" name='title' id="note-title-input">
             <textarea name="note" id="note-description-input">{{datas.note}} </textarea>
-            <button type="submit" id="add-note" onclick="add(event)"> Update </button>
+            <button type="submit" id="add-note" > Update </button>
            <a href="{{url_for('home')}}"><button type="button" id="cancel-popup">Cancel</button></a> 
         </form> 
     </div>
 
 </body>
+
+<script src="{{ url_for('static', filename='jquery-3.7.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='jquery.validate.min.js') }}"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </html>
 

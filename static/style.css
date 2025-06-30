@@ -3,12 +3,12 @@
     padding: 0;
     outline: none;
     overflow-wrap:break-word;
-    caret-color: white ;
+    caret-color: white ;   
 }
 
 
 .navbar{
-    background-color:deepskyblue;
+    background-color:aquamarine;
     padding: 10px;
     margin: none;
 
@@ -20,36 +20,55 @@
 
 .note-container{
     padding: 15px;
-    /* width: 25%; */
+    width: 20%;
+    height: 150px;
     background-color: black;
     color: black ;
     margin: 30px;
     display: inline-block;
     border-radius: 10px;
     vertical-align: top;
-    
+    position: relative;
 }
 
 .note-container h2{
-    color:deepskyblue;
+    color:rgb(62, 235, 178);
+    display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
 }
 
-.note-container .delete{
-    color: black;
-    background-color : deepskyblue ;
-    border-radius: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding: 10px;
-    padding: 10px;
-    border: none ;
-    margin-top:10px ;
+.note-container p {
+    color:rgb(224, 230, 231);
+    padding-top: 10px;
+
+    display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+
+
     
 }
 
+.note-container .delete {
+    background: none;
+    border: none;
+    color:aquamarine;  
+}
+
+.delete img {
+    width: 25px;
+    position: absolute;
+    left: 80%;
+    top: 70%;
+}
 
 .add-button{
-    background-color: deepskyblue;
+    background-color: aquamarine;
     color: black;
     border: none;
     border-radius: 100%;
@@ -79,7 +98,7 @@
 }
 
 .popup-box{
-    background-color :deepskyblue;
+    background-color :aquamarine;
     width: 90% ;
     height: 80%;
     padding: 40px;
@@ -89,9 +108,6 @@
     z-index: 2;
     display: none;
     position: fixed;
- 
-   
-
 }
 
 .popup-box input {
@@ -105,7 +121,9 @@
     margin-bottom:10px;
     
 }
-
+.edituser{
+    display: block;
+}
 #note-title-input{
     font-size: medium;
     font-style:unset;
@@ -121,10 +139,12 @@
     width: 100%;
     margin: 5px;
     padding: 5px;
+    resize: none;
     
 }
 
-.popup-box input::placeholder{
+
+.popup-box ,input::placeholder{
     color: black;
 }
 
@@ -136,10 +156,28 @@
 
     background-color: black;
     padding: 10px 20px 10px 20px;
-    margin: 5px;
+    /* margin: 5px; */
     border: none;
     color: white;
     border-radius: 10px;
+}
+
+#add-notes{
+    position: absolute;
+    left: 82%;
+    bottom: 10%;
+}
+
+#cancel-popup{
+    position: absolute;
+    left: 90% ;
+    bottom: 10%;
+}
+
+#cancel-popup-editnote{
+    position: absolute;
+    left: 90% ;
+    bottom: 10%;
 }
 
 .newuser{
@@ -149,9 +187,10 @@
 .edit{
   margin-left: 200px;
   text-decoration: none;
-
+  padding: 1%;
+  padding-bottom:60px;
+  padding-right: 250px;
 }
-
 .Login{
     position: fixed;
     text-decoration: none;
@@ -165,6 +204,12 @@
 
 .signup{
     margin-left: 90%;
+}
+
+#register{
+   position:fixed; 
+   left: 44%;
+   top: 65%;
 }
 
 .forgotpassword{
@@ -188,21 +233,16 @@
     padding-bottom: 30px;
 }
 
-.close{
+.close img {
    position: absolute;
-   text-decoration: none ;
-   top: 5%;
+   top: 3%;
    left: 90%;
-   color: black;
+   width: 20px;
 }
 
 .loginpage button {
     margin-top: 80px;
     padding: 10px 30px 10px 30px;
-}
-
-.edituser{
-    display: block;
 }
 
 .logout{
@@ -217,18 +257,23 @@
 
 .welcome big {
     font-size:xx-large;
-    color:deepskyblue;
-
+    color:turquoise;
 }
 
 .welcome a {
-    color :deepskyblue;
+    color : rgb(0, 179, 255)
 }
 
 .error-msg{
     color:red;
     font-size: small;
     padding-bottom: 10px;
+}
+
+.error{
+    display: flex;
+    font-size:small;
+    color:red;
 }
 
 .container{
@@ -241,6 +286,27 @@
     background-color: black;
     flex-basis: 20%;
 }
+/* 
+.flash{
+    position: absolute;
+    left: 60%; 
+    top: 20%;   
+    width: 400px;
+    height: 30px;
+    background-color: rgb(57, 201, 71);
+    color: black;
+    opacity:0.9;
+    margin: 5px;
+    padding: 10px;
+    z-index: 3;
+
+}
+
+.flash-close{
+    position: absolute;
+    left: 80%;
+} */
+
 
 @media screen and (max-width:800px) {
 
@@ -264,4 +330,3 @@
         flex-basis: 80%;
     }
 }
-  

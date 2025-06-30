@@ -19,9 +19,12 @@ mysql = MySQL(app)
 
  
 @app.route('/', methods=['GET', 'POST'] )
-def home():     
+def home():    
+    
+# check if the user is logged in , if not redirect to home page  
   if 'user_id' in session :
     id = session['user_id']
+    # insert the data into user notes and redirect it to home again to show the inserted note using the user_id stored in session
     if request.method == "POST":
 
         notetitle = request.form['title']
@@ -41,35 +44,42 @@ def home():
   else :
     return render_template('home.html')
     
+# get the note id by data.note_id in index page and delete it from the db
 
-@app.route('/deletenote/<string:id>')
-def deletenote(id):
-    if 'user_id' in session :
+@app.route('/deletenote/<int:user>/<string:id>')
+def deletenote(user,id):
+   
+    if  session['user_id'] == user:
         con = mysql.connection.cursor()
-        sql = "delete from notes where  note_id=%s"
-        con.execute(sql,[id])
+        sql = "delete from notes where note_id=%s"
+        con.execute(sql,[id,])
         mysql.connection.commit()
         con.close()
+        flash("Note deleted Successfully")
         return redirect(url_for("home")) 
     else :
         return redirect(url_for('login'))  
-    
-@app.route('/editnote/<string:id>', methods=["POST", "GET"])
-def editnote(id):
-    con = mysql.connection.cursor()
-    if request.method == "POST":
-        notetitle = request.form['title']
-        notes = request.form['note']
-        sql = "UPDATE notes SET title=%s, note=%s WHERE note_id=%s" 
-        con.execute(sql, (notetitle, notes, id))    
-        mysql.connection.commit()
-        con.close()
-        userid = request.args.get('userid')
-        return redirect(url_for("home",userid=userid))
-    con.execute("SELECT * FROM notes WHERE note_id=%s",(id,))
-    res = con.fetchone()
-    return render_template('edituser.html', datas=res)
 
+
+ 
+@app.route('/editnote<int:user>/<int:id>', methods=["POST", "GET"])
+def editnote(user,id):
+    # check that note user id and session's user id are same to prevent another users to modify other's note 
+    if  session['user_id'] == user:
+        con = mysql.connection.cursor()
+        if request.method == "POST" :
+            notetitle = request.form['title']
+            notes = request.form['note']
+            sql = "UPDATE notes SET title=%s, note=%s WHERE note_id=%s and user_id=%s" 
+            con.execute(sql, (notetitle, notes, id,user))    
+            mysql.connection.commit()
+            con.close()
+            return redirect(url_for("home"))
+        con.execute("SELECT * FROM notes WHERE user_id=%s and note_id=%s",(user,id,))
+        res = con.fetchone()
+        return render_template('edituser.html', datas=res)
+    else:
+       return redirect(url_for('home'))
 
 @app.route('/login',methods=['POST','GET'])
 def login():
@@ -77,11 +87,11 @@ def login():
     password_incorrect = False
     if request.method == 'POST':
         session.permanent = True 
-        email = request.form['usermail']
+        useremail = request.form['usermail']
         password = request.form['password']
         
         con = mysql.connection.cursor()
-        con.execute(("select * from users WHERE email=%s"),(email,))
+        con.execute(("select * from users WHERE email=%s"),(useremail,))
         user = con.fetchone()
         con.close() 
         
@@ -90,7 +100,7 @@ def login():
             return redirect(url_for('home'))
         else:
             password_incorrect = True
-            return render_template('login.html',password_incorrect = password_incorrect)
+            return render_template('login.html',password_incorrect = password_incorrect,useremail=useremail)
     else:
         if 'user_id' in session :
             return redirect(url_for('home'))        
@@ -103,33 +113,30 @@ def signup():
     if request.method == 'POST':
         session.permanent = True 
         username = request.form['username']
-        usermail = request.form['usermail']
+        useremail = request.form['usermail']
         password = request.form['password']   
         cpassword = request.form['cpassword']
         
-        con.execute(("select * from users WHERE email=%s "),(usermail,))
+        con.execute(("select * from users WHERE email=%s "),(useremail,))
         res = con.fetchone()
         alreadysignuped = False
-        both_are_not_same = False
         
         if res :
            alreadysignuped = True
-           return render_template("signup.html",alreadysignuped = alreadysignuped)
+           return render_template("login.html",alreadysignuped = alreadysignuped,useremail=useremail)
             
-        elif password == cpassword :
+        else :
             sql="INSERT INTO Users (user_name,email,password) VALUES (%s,%s,%s);"
-            con.execute(sql,(username,usermail, generate_password_hash(password))) 
+            con.execute(sql,(username,useremail, generate_password_hash(password))) 
             mysql.connection.commit()
-            
-            con.execute(("select * from users WHERE email=%s "),(usermail,))
+            # create a new user with the data and get the unique auto incremented user_id from with the help of email . 
+            con.execute(("select * from users WHERE email=%s "),(useremail,))
             res = con.fetchone()
+            # store it in the session to access and check if the user is logged in or not 
             session['user_id'] = res['user_id']
             con.close()
             
             return redirect(url_for('home'))
-        else :
-            both_are_not_same = True
-            return render_template("signup.html",both_are_not_same = both_are_not_same)
     else:
         if 'user_id' in session :
             return redirect(url_for('home'))
