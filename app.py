@@ -20,12 +20,26 @@ app.permanent_session_lifetime = timedelta(days=7)
 
 # Railway MySQL configuration
 
+
+
 app.config["MYSQL_HOST"] = "mysql.railway.internal"
-app.config["MYSQL_PORT"] = 52532
+app.config["MYSQL_PORT"] = 3306
 app.config["MYSQL_USER"] = "root"
 app.config["MYSQL_PASSWORD"] = "xKaFXsDMnUVqxUsDdpXmYQfXuzwbBraQ"
 app.config["MYSQL_DB"] = "railway"
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"
+
+import traceback
+
+try:
+    conn = mysql.connect()
+    print("✅ Connected to database")
+except Exception as e:
+    print("❌ ERROR connecting to DB:")
+    traceback.print_exc()  
+
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 
 # Connect manually with MySQLdb (not Flask-MySQLdb anymore)
@@ -37,6 +51,8 @@ def get_mysql_connection():
         db=app.config["MYSQL_DB"],
         cursorclass=MySQLdb.cursors.DictCursor
     )
+    
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
