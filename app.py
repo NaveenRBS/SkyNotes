@@ -38,6 +38,20 @@ def get_mysql_connection():
         cursorclass=MySQLdb.cursors.DictCursor
     )
 
+import traceback
+
+try:
+    conn = mysql.connect()
+    print("✅ Connected to database")
+except Exception as e:
+    print("❌ ERROR connecting to DB:")
+    traceback.print_exc()  
+
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
+
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if 'user_id' in session:
