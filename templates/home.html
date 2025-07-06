@@ -1,36 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkyNotes</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkyNotes Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <div class="navbar">
-        <h1>SkyNotes</h1>
-        <a href="{{url_for('login')}}"  id="login" class="Login"> Login </a>
-        <a href="{{url_for('signup')}}"  id="login" class="Login signup"> Sign-up </a>
+  <!-- Header / Navbar -->
+  <header class="navbar">
+    <h1>SkyNotes</h1>
+    <!-- <nav>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">Log‑Out</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Log‑In</a>
+        <a href="{{ url_for('signup') }}">Sign‑Up</a>
+      {% endif %}
+    </nav> -->
+  </header>
 
-</div> 
+  <main>
 
-    {% with message = get_flashed_messages(with_categories = false) %}
-        {% if message %}
-            {% for messages in message %}
-            {{messages}}
-            {% endfor%}
-        {% endif%}
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=false) %}
+      {% if messages %}
+      <div class="flash-message">
+        {% for msg in messages %}
+          <p>{{ msg }}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
     {% endwith %}
 
-    <P class="welcome"><big> SkyNotes </big> Simplify your note-taking experience <br>access your notes from anywhere. <a href="{{url_for('login')}}" class="homelogin"> Log in </a> or <a href="{{url_for('signup')}}"> sign up </a> now to start organizing your ideas effortlessly.</P>
+    <!-- Welcome Banner -->
+    <section class="welcome">
+      <p>
+        <strong>SkyNotes</strong> — your sleek, dark‑mode note hub.<br>
+        Access & organize anywhere.
+      </p>
+      {% if not current_user.is_authenticated %}
+        <p>
+          <a href="{{ url_for('login') }}">Log in</a> or
+          <a href="{{ url_for('signup') }}">sign up</a> to get started.
+        </p>
+      {% endif %}
+    </section>
+
+    <!-- Create Note Button -->
+    {% if current_user.is_authenticated %}
+    <section style="text-align:center; margin-bottom:1rem;">
+      <a href="{{ url_for('add_note') }}" class="btn">+ New Note</a>
+    </section>
+    {% endif %}
+
+    <!-- Notes Grid -->
+    <section class="notes-wrapper">
+      {% for note in notes %}
+      <article class="note-container">
+        <h2>{{ note.title }}</h2>
+        <p>{{ note.content }}</p>
+        <form action="{{ url_for('delete_note', note_id=note.id) }}" method="POST" class="delete">
+          <button type="submit">
+            <img src="{{ url_for('static', filename='img/delete.png') }}" alt="Delete">
+          </button>
+        </form>
+      </article>
+      {% endfor %}
+
+      {% if notes|length == 0 and current_user.is_authenticated %}
+        <p style="color:#bbb; text-align:center; width:100%;">No notes yet. Create one!</p>
+      {% endif %}
+    </section>
+
+  </main>
 
 </body>
-
-    <script src="{{ url_for('static', filename='jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='jquery.validate.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-
 </html>
-

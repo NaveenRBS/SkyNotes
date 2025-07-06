@@ -1,0 +1,332 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    overflow-wrap:break-word;
+    caret-color: white ;   
+}
+
+
+.navbar{
+    background-color:aquamarine;
+    padding: 10px;
+    margin: none;
+
+}
+
+.container{
+    padding: 10px;
+}
+
+.note-container{
+    padding: 15px;
+    width: 20%;
+    height: 150px;
+    background-color: black;
+    color: black ;
+    margin: 30px;
+    display: inline-block;
+    border-radius: 10px;
+    vertical-align: top;
+    position: relative;
+}
+
+.note-container h2{
+    color:rgb(62, 235, 178);
+    display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.note-container p {
+    color:rgb(224, 230, 231);
+    padding-top: 10px;
+
+    display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+
+
+    
+}
+
+.note-container .delete {
+    background: none;
+    border: none;
+    color:aquamarine;  
+}
+
+.delete img {
+    width: 25px;
+    position: absolute;
+    left: 80%;
+    top: 70%;
+}
+
+.add-button{
+    background-color: aquamarine;
+    color: black;
+    border: none;
+    border-radius: 100%;
+    padding: 15px 25px 15px 25px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    font-size: 30px;
+}
+
+.add-button ,button:hover{
+    cursor: pointer;
+}
+
+.popup-overlay{
+    
+    background-color: black;
+    top: 0px;
+    left: 0px;
+    opacity: 0.8;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: none;
+    position: fixed;
+}
+
+.popup-box{
+    background-color :aquamarine;
+    width: 90% ;
+    height: 80%;
+    padding: 40px;
+    border-radius: 10px;
+    bottom: 2%;
+    left: 2%;
+    z-index: 2;
+    display: none;
+    position: fixed;
+}
+
+.popup-box input {
+    border: none ;
+    background:transparent;
+    border-bottom: solid black 2px;
+    width: 100%;
+    margin: 5px;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom:10px;
+    
+}
+.edituser{
+    display: block;
+}
+#note-title-input{
+    font-size: medium;
+    font-style:unset;
+    border: none;
+}
+
+.popup-box textarea{
+
+    background:transparent;
+    border: solid black 2px;
+    border:none;
+    height: 300px;
+    width: 100%;
+    margin: 5px;
+    padding: 5px;
+    resize: none;
+    
+}
+
+
+.popup-box ,input::placeholder{
+    color: black;
+}
+
+.popup-box textarea::placeholder{
+    color: black;
+}
+
+.popup-box button{
+
+    background-color: black;
+    padding: 10px 20px 10px 20px;
+    /* margin: 5px; */
+    border: none;
+    color: white;
+    border-radius: 10px;
+}
+
+#add-notes{
+    position: absolute;
+    left: 82%;
+    bottom: 10%;
+}
+
+#cancel-popup{
+    position: absolute;
+    left: 90% ;
+    bottom: 10%;
+}
+
+#cancel-popup-editnote{
+    position: absolute;
+    left: 90% ;
+    bottom: 10%;
+}
+
+.newuser{
+    display: block;
+}
+
+.edit{
+  margin-left: 200px;
+  text-decoration: none;
+  padding: 1%;
+  padding-bottom:60px;
+  padding-right: 250px;
+}
+.Login{
+    position: fixed;
+    text-decoration: none;
+    margin-left: 85%;
+    color: black;
+    top: 3%;
+    font-size: large;
+    padding-right: 10px;
+    position: absolute;
+}
+
+.signup{
+    margin-left: 90%;
+}
+
+#register{
+   position:fixed; 
+   left: 44%;
+   top: 65%;
+}
+
+.forgotpassword{
+    
+    font-size: small;
+    display: block;
+}
+
+.loginpage{
+    
+    display: block;
+    width: 20%;
+    height: 60%;
+    left: 35%;
+    right: 35%;
+    bottom: 10%;
+   
+}
+
+.loginpage h2 {
+    padding-bottom: 30px;
+}
+
+.close img {
+   position: absolute;
+   top: 3%;
+   left: 90%;
+   width: 20px;
+}
+
+.loginpage button {
+    margin-top: 80px;
+    padding: 10px 30px 10px 30px;
+}
+
+.logout{
+    margin-left: 90%;
+}
+
+.welcome{
+    margin-top: 10%;
+    margin-left: 10%;
+    font-size: large;
+}
+
+.welcome big {
+    font-size:xx-large;
+    color:turquoise;
+}
+
+.welcome a {
+    color : rgb(0, 179, 255)
+}
+
+.error-msg{
+    color:red;
+    font-size: small;
+    padding-bottom: 10px;
+}
+
+.error{
+    display: flex;
+    font-size:small;
+    color:red;
+}
+
+.container{
+    display: flex ; 
+    justify-content: left ;
+    flex-wrap: wrap; 
+}
+.note-container{
+    margin: 15px;
+    background-color: black;
+    flex-basis: 20%;
+}
+/* 
+.flash{
+    position: absolute;
+    left: 60%; 
+    top: 20%;   
+    width: 400px;
+    height: 30px;
+    background-color: rgb(57, 201, 71);
+    color: black;
+    opacity:0.9;
+    margin: 5px;
+    padding: 10px;
+    z-index: 3;
+
+}
+
+.flash-close{
+    position: absolute;
+    left: 80%;
+} */
+
+
+@media screen and (max-width:800px) {
+
+    .container{
+        justify-content: space-between ;
+
+    }
+    .note-container{
+        flex-basis: 35%;
+    }
+}
+
+@media screen and (max-width:550px) {
+
+    .container{
+        justify-content: space-between ;
+
+    }
+
+    .note-container{
+        flex-basis: 80%;
+    }
+}

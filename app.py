@@ -51,7 +51,7 @@ def home():
         con.close()
         return render_template('index.html', datas=notes)
     else:
-        return render_template('home.html')
+        return render_template('index.html')
 
 @app.route('/deletenote/<int:user>/<int:id>')
 def deletenote(user, id):

@@ -1,49 +1,73 @@
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkyNotes Register</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up – SkyNotes</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <div class="navbar">
-        <h1>SkyNotes</h1>
-    </div>
+  <!-- Header / Navbar -->
+  <header class="navbar">
+    <h1>SkyNotes</h1>
+    <nav>
+      <a href="{{ url_for('login') }}">Log‑In</a>
+    </nav>
+  </header>
 
-    {% with message = get_flashed_messages(with_categories = false) %}
-        {% if message %}
-            {% for messages in message %}
-            {{messages}}
-            {% endfor%}
-        {% endif%}
+  <!-- Centered Main Area -->
+  <main class="login-main">
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=false) %}
+      {% if messages %}
+      <div class="flash-message">
+        {% for msg in messages %}
+          <p>{{ msg }}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
     {% endwith %}
 
-    <div class="popup-overlay newuser"></div>
+    <!-- Sign Up Form -->
+    <section class="form-container">
+      <h2 class="form-title">Create Your Account</h2>
+      <form action="{{ url_for('signup') }}" method="POST">
+        {{ form.hidden_tag() if form else "" }}
 
-    <div class="popup-box loginpage">
-        <center>
-            <h2> sign-up </h2>
-        <form action="" method="POST" id="signup-form"  >    
-              
-            <input type="text" name='username' placeholder="First Name" class="note-title-input" value="{{username}}" >
-            <input type="email" name='usermail' placeholder="Gmail" class="note-title-input" value="{{useremail}}" >
-            
-            <input type="password" name='password' id="sign-up-pass" placeholder="Password" class="note-title-input" value="{{password}}"  >
-            <input type="password" name='cpassword' id="sign-up-repass"  placeholder="Confirm Password" class="note-title-input" >
+        <label for="username">Username</label>
+        <input
+          type="text" id="username" name="username"
+          placeholder="Pick a username" required
+        />
 
-            <button type="submit" id="register"> Register </button>
-            <a href="{{url_for('login')}}" class="forgotpassword">Already have an account?</a>
-            <a href="{{url_for('home')}}" class="close"> <img src="{{url_for('static',filename='img/close.png')}}" alt="X"> </a>   
-        </form> 
-        </center>
-    </div>
+        <label for="email">Email</label>
+        <input
+          type="email" id="email" name="email"
+          placeholder="you@example.com" required
+        />
+
+        <label for="password">Password</label>
+        <input
+          type="password" id="password" name="password"
+          placeholder="••••••••" required
+        />
+
+        <label for="confirm">Confirm Password</label>
+        <input
+          type="password" id="confirm" name="confirm"
+          placeholder="Repeat your password" required
+        />
+
+        <input type="submit" value="Sign Up" />
+
+        <p class="below-form">
+          Already have an account?
+          <a href="{{ url_for('login') }}">Log in</a>
+        </p>
+      </form>
+    </section>
+  </main>
 
 </body>
-
-<script src="{{ url_for('static', filename='jquery-3.7.1.min.js') }}"></script>
-<script src="{{ url_for('static', filename='jquery.validate.min.js') }}"></script>
-<script src="{{ url_for('static', filename='script.js') }}"></script>
-
 </html>

@@ -1,332 +1,345 @@
-*{
+/* ===== Global & Typography ===== */
+* {
     margin: 0;
     padding: 0;
-    outline: none;
-    overflow-wrap:break-word;
-    caret-color: white ;   
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 
+                 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
 }
 
-
-.navbar{
-    background-color:aquamarine;
-    padding: 10px;
-    margin: none;
-
+body {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    line-height: 1.6;
+    min-height: 100vh;
 }
 
-.container{
-    padding: 10px;
+/* ===== Navbar ===== */
+.navbar {
+    background-color: #121212;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
 }
 
-.note-container{
-    padding: 15px;
-    width: 20%;
-    height: 150px;
-    background-color: black;
-    color: black ;
-    margin: 30px;
-    display: inline-block;
-    border-radius: 10px;
-    vertical-align: top;
-    position: relative;
+.navbar h1 {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
-.note-container h2{
-    color:rgb(62, 235, 178);
-    display: -webkit-box;
--webkit-line-clamp: 1;
--webkit-box-orient: vertical;
-overflow: hidden;
-text-overflow: ellipsis;
-}
-
-.note-container p {
-    color:rgb(224, 230, 231);
-    padding-top: 10px;
-
-    display: -webkit-box;
--webkit-line-clamp: 2;
--webkit-box-orient: vertical;
-overflow: hidden;
-text-overflow: ellipsis;
-
-
-    
-}
-
-.note-container .delete {
-    background: none;
-    border: none;
-    color:aquamarine;  
-}
-
-.delete img {
-    width: 25px;
-    position: absolute;
-    left: 80%;
-    top: 70%;
-}
-
-.add-button{
-    background-color: aquamarine;
-    color: black;
-    border: none;
-    border-radius: 100%;
-    padding: 15px 25px 15px 25px;
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    font-size: 30px;
-}
-
-.add-button ,button:hover{
-    cursor: pointer;
-}
-
-.popup-overlay{
-    
-    background-color: black;
-    top: 0px;
-    left: 0px;
-    opacity: 0.8;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    display: none;
-    position: fixed;
-}
-
-.popup-box{
-    background-color :aquamarine;
-    width: 90% ;
-    height: 80%;
-    padding: 40px;
-    border-radius: 10px;
-    bottom: 2%;
-    left: 2%;
-    z-index: 2;
-    display: none;
-    position: fixed;
-}
-
-.popup-box input {
-    border: none ;
-    background:transparent;
-    border-bottom: solid black 2px;
-    width: 100%;
-    margin: 5px;
-    padding: 5px;
-    margin-top: 5px;
-    margin-bottom:10px;
-    
-}
-.edituser{
-    display: block;
-}
-#note-title-input{
-    font-size: medium;
-    font-style:unset;
-    border: none;
-}
-
-.popup-box textarea{
-
-    background:transparent;
-    border: solid black 2px;
-    border:none;
-    height: 300px;
-    width: 100%;
-    margin: 5px;
-    padding: 5px;
-    resize: none;
-    
-}
-
-
-.popup-box ,input::placeholder{
-    color: black;
-}
-
-.popup-box textarea::placeholder{
-    color: black;
-}
-
-.popup-box button{
-
-    background-color: black;
-    padding: 10px 20px 10px 20px;
-    /* margin: 5px; */
-    border: none;
-    color: white;
-    border-radius: 10px;
-}
-
-#add-notes{
-    position: absolute;
-    left: 82%;
-    bottom: 10%;
-}
-
-#cancel-popup{
-    position: absolute;
-    left: 90% ;
-    bottom: 10%;
-}
-
-#cancel-popup-editnote{
-    position: absolute;
-    left: 90% ;
-    bottom: 10%;
-}
-
-.newuser{
-    display: block;
-}
-
-.edit{
-  margin-left: 200px;
-  text-decoration: none;
-  padding: 1%;
-  padding-bottom:60px;
-  padding-right: 250px;
-}
-.Login{
-    position: fixed;
+.navbar a {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
     text-decoration: none;
-    margin-left: 85%;
-    color: black;
-    top: 3%;
-    font-size: large;
-    padding-right: 10px;
-    position: absolute;
+    margin-left: 1rem;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease;
 }
 
-.signup{
-    margin-left: 90%;
+.navbar a:hover {
+    background-color: #333333;
 }
 
-#register{
-   position:fixed; 
-   left: 44%;
-   top: 65%;
-}
-
-.forgotpassword{
-    
-    font-size: small;
-    display: block;
-}
-
-.loginpage{
-    
-    display: block;
-    width: 20%;
-    height: 60%;
-    left: 35%;
-    right: 35%;
-    bottom: 10%;
-   
-}
-
-.loginpage h2 {
-    padding-bottom: 30px;
-}
-
-.close img {
-   position: absolute;
-   top: 3%;
-   left: 90%;
-   width: 20px;
-}
-
-.loginpage button {
-    margin-top: 80px;
-    padding: 10px 30px 10px 30px;
-}
-
-.logout{
-    margin-left: 90%;
-}
-
-.welcome{
-    margin-top: 10%;
-    margin-left: 10%;
-    font-size: large;
-}
-
-.welcome big {
-    font-size:xx-large;
-    color:turquoise;
+/* ===== Welcome Banner ===== */
+.welcome {
+    text-align: center;
+    margin: 2rem 1rem;
+    font-size: 1.2rem;
+    color: #cfcfcf;
 }
 
 .welcome a {
-    color : rgb(0, 179, 255)
+    color: #81a1c1;
+    text-decoration: underline;
 }
 
-.error-msg{
-    color:red;
-    font-size: small;
-    padding-bottom: 10px;
+/* ===== Notes Grid & Cards ===== */
+.notes-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1280px;
+    margin: 0 auto;
 }
 
-.error{
+.note-container {
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+
+.note-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+}
+
+.note-container h2 {
+    font-size: 1.1rem;
+    color: #f9f9f9;
+    margin-bottom: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.note-container p {
+    font-size: 0.95rem;
+    color: #c7c7c7;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.4;
+}
+
+/* Delete icon/button */
+.delete {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.delete img {
+    width: 20px;
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+}
+
+.delete img:hover {
+    opacity: 1;
+}
+
+/* ===== Forms & Inputs ===== */
+.form-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    background-color: #1a1a1a;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+.form-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #fafafa;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #bbb;
+    font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #333;
+    border-radius: 6px;
+    background-color: #121212;
+    color: #e0e0e0;
+    transition: border-color 0.2s ease;
+    resize: vertical;
+    font-size: 1rem;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #81a1c1;
+    outline: none;
+}
+
+/* ===== Buttons ===== */
+button,
+input[type="submit"] {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background-color: #3b82f6;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: #2563eb;
+}
+
+/* ===== Misc ===== */
+.flash-message {
+    max-width: 600px;
+    margin: 1rem auto;
+    padding: 1rem 1.5rem;
+    background-color: #323232;
+    color: #e0e0e0;
+    border-left: 4px solid #81a1c1;
+    border-radius: 4px;
+}
+
+a {
+    color: #81a1c1;
+}
+
+
+/* ===== Center Login Form Vertically ===== */
+.login-main {
     display: flex;
-    font-size:small;
-    color:red;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 68px); /* subtract navbar height */
+    padding: 1rem;
 }
 
-.container{
-    display: flex ; 
-    justify-content: left ;
-    flex-wrap: wrap; 
-}
-.note-container{
-    margin: 15px;
-    background-color: black;
-    flex-basis: 20%;
-}
-/* 
-.flash{
-    position: absolute;
-    left: 60%; 
-    top: 20%;   
-    width: 400px;
-    height: 30px;
-    background-color: rgb(57, 201, 71);
-    color: black;
-    opacity:0.9;
-    margin: 5px;
-    padding: 10px;
-    z-index: 3;
-
+/* Ensure flash message doesn’t push form off center */
+.flash-message {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 1.5rem;
 }
 
-.flash-close{
-    position: absolute;
-    left: 80%;
-} */
-
-
-@media screen and (max-width:800px) {
-
-    .container{
-        justify-content: space-between ;
-
-    }
-    .note-container{
-        flex-basis: 35%;
-    }
+/* Tweak form-container spacing */
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0;  /* removed auto so centering by .login-main */
+    background-color: #1a1a1a;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
 }
 
-@media screen and (max-width:550px) {
+.below-form {
+    margin-top: 1rem;
+    text-align: center;
+    color: #bbb;
+    font-size: 0.9rem;
+}
 
-    .container{
-        justify-content: space-between ;
+.below-form a {
+    color: #81a1c1;
+    text-decoration: none;
+}
 
-    }
+.below-form a:hover {
+    text-decoration: underline;
+}
+/* ===== Overlay ===== */
+.popup-overlay.newuser {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30,30,30,0.9);
+    z-index: 1000;
+}
 
-    .note-container{
-        flex-basis: 80%;
-    }
+/* ===== Modal Box ===== */
+.popup-box.edituser {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #2a2a2a;
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    z-index: 1001;
+}
+
+/* Modal Title */
+.popup-box.edituser h2 {
+    color: #fafafa;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Form inside modal */
+.popup-form label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: #c7c7c7;
+    font-size: 0.95rem;
+}
+
+.popup-form input[type="text"],
+.popup-form textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    background-color: #121212;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #e0e0e0;
+    transition: border-color 0.2s ease;
+    font-size: 1rem;
+}
+
+.popup-form input[type="text"]:focus,
+.popup-form textarea:focus {
+    border-color: #81a1c1;
+    outline: none;
+}
+
+/* Action buttons container */
+.popup-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Primary button */
+#add-note {
+    background-color: #3b82f6;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#add-note:hover {
+    background-color: #2563eb;
+}
+
+/* Secondary (cancel) button */
+.btn-secondary button {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-secondary button:hover {
+    background-color: #3b3b3b;
 }
