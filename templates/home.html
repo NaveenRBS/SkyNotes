@@ -24,7 +24,7 @@
   <main>
 
     <!-- Flash messages -->
-    {% with messages = get_flashed_messages(with_categories=false) %}
+    <!-- {% with messages = get_flashed_messages(with_categories=false) %}
       {% if messages %}
       <div class="flash-message">
         {% for msg in messages %}
@@ -32,7 +32,7 @@
         {% endfor %}
       </div>
       {% endif %}
-    {% endwith %}
+    {% endwith %} -->
 
     <!-- Welcome Banner -->
     <section class="welcome">
@@ -69,9 +69,9 @@
       </article>
       {% endfor %}
 
-      {% if notes|length == 0 and current_user.is_authenticated %}
+      <!-- {% if notes|length == 0 and current_user.is_authenticated %}
         <p style="color:#bbb; text-align:center; width:100%;">No notes yet. Create one!</p>
-      {% endif %}
+      {% endif %} -->
     </section>
 
   </main>
