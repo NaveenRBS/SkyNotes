@@ -61,7 +61,9 @@
           <div class="note-actions">
             <!-- Edit link -->
             <a
-              href="{{ url_for('editnote', user=session.get('user_id'), id=note.note_id) }}"
+              href="{{ url_for('editnote',
+                               user_id=session.get('user_id'),
+                               note_id=note.note_id) }}"
               class="btn small"
             >
               Edit
@@ -69,7 +71,9 @@
 
             <!-- Delete link -->
             <a
-              href="{{ url_for('deletenote', user=session.get('user_id'), id=note.note_id) }}"
+              href="{{ url_for('deletenote',
+                               user_id=session.get('user_id'),
+                               note_id=note.note_id) }}"
               class="btn small warn"
             >
               Delete
