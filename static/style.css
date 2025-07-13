@@ -353,3 +353,71 @@ a {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
   }
   
+  /* ===== Updated Buttons ===== */
+button,
+input[type="submit"],
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background-color: #444; /* Darker neutral */
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease;
+}
+
+button:hover,
+input[type="submit"]:hover,
+.btn:hover {
+    background-color: #5e5e5e;
+}
+
+/* ===== Updated Note Card ===== */
+.note-container {
+    background-color: #2a2a2a;
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.note-container:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.note-container h3 {
+    font-size: 1.15rem;
+    color: #f1f1f1;
+    margin-bottom: 0.7rem;
+    word-wrap: break-word;
+}
+
+.note-container p {
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.5;
+    max-height: 9em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ===== Note Wrapper Adjustments ===== */
+.notes-wrapper {
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+}
+
+/* ===== Note Link Wrapper ===== */
+.note-link {
+    text-decoration: none;
+    color: inherit;
+}
