@@ -1,49 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Welcome to SkyNotes</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyNotes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
 </head>
 <body>
 
-  <!-- Navbar -->
-  <header class="navbar">
-    <h1>SkyNotes</h1>
-    <nav>
-      <a href="{{ url_for('login') }}">Log‑In</a>
-      <a href="{{ url_for('signup') }}">Sign‑Up</a>
-    </nav>
-  </header>
+    <div class="navbar">
+        <h1>SkyNotes</h1>
+        <!-- <a href="{{url_for('login')}}"  id="login" class="Login"  > Login |</a>   -->
+        <a href="{{url_for('logout')}}" id="signup" class="Login logout" > Logout </a>  
+    </div> 
 
-  <main class="login-main">
-    <!-- Flash messages -->
-    <!-- {% with messages = get_flashed_messages(with_categories=false) %}
-      {% if messages %}
-      <div class="flash-message">
-        {% for msg in messages %}
-          <p>{{ msg }}</p>
-        {% endfor %}
-      </div>
-      {% endif %}
+    <!-- {% with message = get_flashed_messages(with_categories = false) %}
+        {% if message %}
+             {% for messages in message %} 
+            <div class="flash"> {{message[0]}} <a class="flash-close">X</a></div>
+           {% endfor%} 
+        {% endif%}
     {% endwith %} -->
 
-    <!-- Landing Content -->
-    <section class="welcome">
-      <h2 style="font-size:1.5rem; color:#fafafa; margin-bottom:1rem;">
-        Welcome to SkyNotes
-      </h2>
-      <p style="color:#cfcfcf; margin-bottom:2rem;">
-        A sleek, dark‑mode note taking app inspired by Notion.<br>
-        Organize your thoughts, ideas, and tasks—all in one place. zzzzzzzzzzzzzzzzzzzzzzzzzz
-      </p>
-      <div>
-        <a href="{{ url_for('signup') }}" class="btn">Get Started</a>
-        <a href="{{ url_for('login') }}" class="btn" style="background-color:#2d2d2d; margin-left:1rem;">Log In</a>
-      </div>
-    </section>
-  </main>
+    <div class="container" >
+       
+       {% for data in datas %}
+        
+        <div class="note-container" > 
+        <a href="{{url_for('editnote',user=data.user_id,id=data.note_id)}}"  class="edit">
+              <h2 id="note-title">{{ data.title }}</h2>
+              <p id="notes">{{ data.note }}</p>
+              <a href="{{url_for('deletenote',user=data.user_id,id=data.note_id)}}"> <button type="button" class="delete"><img src="{{ url_for('static', filename='img/delete (2).png') }}" alt="Delete"></button></a>
+        </a >
+        </div>
+        {% endfor %}
+
+    </div>
+   
+    <div>
+        <button class="add-button" id="add-popup"> + </button>
+    </div>
+
+    <div class="popup-overlay"></div>
+
+    <div class="popup-box">
+        <h2>Add Note</h2>
+        <form action="" method="POST" class="popup-form">
+            <input type="text" placeholder="Title" name="title" id="note-title-input" >
+            <textarea placeholder="Note" name="note" id="note-description-input" ></textarea>
+            <button type="submit" id="add-note" >Add </button>
+            <button type="button"  id="cancel-popup">Cancel</button>
+        </form> 
+    </div> 
+
 
 </body>
+
+<script src="{{ url_for('static', filename='jquery-3.7.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='jquery.validate.min.js') }}"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </html>
+
