@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Your Notes – SkyNotes</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
 
@@ -30,56 +32,47 @@
       {% endif %}
     {% endwith %}
 
-    <!-- Add New Note Form -->
-    <section class="form-container">
-      <h2 class="form-title">Add a New Note</h2>
-      <form action="{{ url_for('dashboard') }}" method="POST">
-        <label for="title">Title</label>
-        <input
-          type="text" id="title" name="title"
-          placeholder="Note title" required
-        />
-
-        <label for="note">Content</label>
-        <textarea
-          id="note" name="note" rows="4"
-          placeholder="Write your note here…" required
-        ></textarea>
-
-        <input type="submit" value="Save Note" />
-      </form>
+    <!-- Add Note Button -->
+    <section style="text-align:center; margin: 1.5rem 0;">
+      <button id="add-popup" class="btn">+ New Note</button>
     </section>
+
+    <!-- Popup Modal for Adding New Note -->
+    <div class="popup-overlay newuser" style="display: none;">
+      <div class="popup-box edituser newuser">
+        <h2>Add a New Note</h2>
+        <form class="popup-form" action="{{ url_for('dashboard') }}" method="POST">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" placeholder="Note title" required />
+
+          <label for="note">Content</label>
+          <textarea id="note" name="note" rows="4" placeholder="Write your note here…" required></textarea>
+
+          <div class="popup-actions">
+            <button type="submit" id="add-note">Save</button>
+            <div class="btn-secondary">
+              <button type="button" id="cancel-popup">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <!-- Notes List -->
     <section class="notes-wrapper">
       {% if datas %}
         {% for note in datas %}
-        <article class="note-container">
-          <h3>{{ note.title }}</h3>
-          <p>{{ note.note }}</p>
-
-          <div class="note-actions">
-            <!-- Edit link -->
-            <a
-              href="{{ url_for('editnote',
-                               user_id=session.get('user_id'),
-                               note_id=note.note_id) }}"
-              class="btn small"
-            >
-              Edit
-            </a>
-
-            <!-- Delete link -->
-            <a
-              href="{{ url_for('deletenote',
-                               user_id=session.get('user_id'),
-                               note_id=note.note_id) }}"
-              class="btn small warn"
-            >
-              Delete
-            </a>
-          </div>
-        </article>
+        <a href="{{ url_for('editnote', user_id=session.get('user_id'), note_id=note.note_id) }}" class="note-link">
+          <article class="note-container">
+            <h3>{{ note.title }}</h3>
+            <p>{{ note.note }}</p>
+            <form action="{{ url_for('deletenote', user_id=session.get('user_id'), note_id=note.note_id) }}" method="POST" class="delete">
+              <button type="submit">
+                <img src="{{ url_for('static', filename='img/delete.png') }}" alt="Delete">
+              </button>
+            </form>
+          </article>
+        </a>
         {% endfor %}
       {% else %}
         <p style="color:#bbb; text-align:center; width:100%;">You have no notes yet. Create one!</p>
