@@ -25,15 +25,15 @@
       </div>
       {% endif %}
     {% endwith %}
-
+<!-- " -->
     <section class="form-container">
       <h2 class="form-title">Log In to SkyNotes</h2>
-      <form action="{{ url_for('login') }}" method="POST">
+      <form  action="{{ url_for('login') }}" method="POST">
         {{ form.hidden_tag() if form else "" }}
         <label for="username">Username</label>
         <input
-          type="text" id="username" name="username"
-          placeholder="Enter your username" required
+          type="text" id="usermail" name="usermail"
+          placeholder="Enter your Usermail" required
         />
 
         <label for="password">Password</label>

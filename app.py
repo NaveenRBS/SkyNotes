@@ -17,7 +17,7 @@ app.config["MYSQL_PASSWORD"] = "xKaFXsDMnUVqxUsDdpXmYQfXuzwbBraQ"
 app.config["MYSQL_DB"] = "railway"
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"
 
-# ✅ Safe connection function
+# Safe connection function
 def get_mysql_connection():
     return pymysql.connect(
         host=app.config["MYSQL_HOST"],
@@ -51,7 +51,7 @@ def home():
         con.close()
         return render_template('index.html', datas=notes)
     else:
-        return render_template('index.html')
+        return render_template('home.html')
 
 @app.route('/deletenote/<int:user>/<int:id>')
 def deletenote(user, id):
@@ -150,9 +150,6 @@ def signup():
 def logout():
     session.pop('user_id', None)
     return redirect(url_for('home'))
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8080)
 
 
 if __name__ == '__main__':
