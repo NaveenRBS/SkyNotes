@@ -1,64 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkyNotes</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Notes – SkyNotes</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <div class="navbar">
-        <h1>SkyNotes</h1>
-        <!-- <a href="{{url_for('login')}}"  id="login" class="Login"  > Login |</a>   -->
-        <a href="{{url_for('logout')}}" id="signup" class="Login logout" > Logout </a>  
-    </div> 
+  <!-- Header / Navbar -->
+  <header class="navbar">
+    <h1>SkyNotes</h1>
+    <nav>
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('logout') }}">Log‑Out</a>
+    </nav>
+  </header>
 
-    <!-- {% with message = get_flashed_messages(with_categories = false) %}
-        {% if message %}
-             {% for messages in message %} 
-            <div class="flash"> {{message[0]}} <a class="flash-close">X</a></div>
-           {% endfor%} 
-        {% endif%}
-    {% endwith %} -->
+  <main class="notes-main">
 
-    <div class="container" >
-       
-       {% for data in datas %}
-        
-        <div class="note-container" > 
-        <a href="{{url_for('editnote',user=data.user_id,id=data.note_id)}}"  class="edit">
-              <h2 id="note-title">{{ data.title }}</h2>
-              <p id="notes">{{ data.note }}</p>
-              <a href="{{url_for('deletenote',user=data.user_id,id=data.note_id)}}"> <button type="button" class="delete"><img src="{{ url_for('static', filename='img/delete (2).png') }}" alt="Delete"></button></a>
-        </a >
-        </div>
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=False) %}
+      {% if messages %}
+      <div class="flash-message">
+        {% for msg in messages %}
+          <p>{{ msg }}</p>
         {% endfor %}
+      </div>
+      {% endif %}
+    {% endwith %}
 
-    </div>
-   
-    <div>
-        <button class="add-button" id="add-popup"> + </button>
-    </div>
+    <!-- Add New Note Form -->
+    <section class="form-container">
+      <h2 class="form-title">Add a New Note</h2>
+      <form action="{{ url_for('dashboard') }}" method="POST">
+        <label for="title">Title</label>
+        <input
+          type="text" id="title" name="title"
+          placeholder="Note title" required
+        />
 
-    <div class="popup-overlay"></div>
+        <label for="note">Content</label>
+        <textarea
+          id="note" name="note" rows="4"
+          placeholder="Write your note here…" required
+        ></textarea>
 
-    <div class="popup-box">
-        <h2>Add Note</h2>
-        <form action="" method="POST" class="popup-form">
-            <input type="text" placeholder="Title" name="title" id="note-title-input" >
-            <textarea placeholder="Note" name="note" id="note-description-input" ></textarea>
-            <button type="submit" id="add-note" >Add </button>
-            <button type="button"  id="cancel-popup">Cancel</button>
-        </form> 
-    </div> 
+        <input type="submit" value="Save Note" />
+      </form>
+    </section>
 
+    <!-- Notes List -->
+    <section class="notes-wrapper">
+      {% if datas %}
+        {% for note in datas %}
+        <article class="note-container">
+          <h3>{{ note.title }}</h3>
+          <p>{{ note.note }}</p>
+
+          <div class="note-actions">
+            <!-- Edit link -->
+            <a
+              href="{{ url_for('editnote', user=session.get('user_id'), id=note.note_id) }}"
+              class="btn small"
+            >
+              Edit
+            </a>
+
+            <!-- Delete link -->
+            <a
+              href="{{ url_for('deletenote', user=session.get('user_id'), id=note.note_id) }}"
+              class="btn small warn"
+            >
+              Delete
+            </a>
+          </div>
+        </article>
+        {% endfor %}
+      {% else %}
+        <p style="color:#bbb; text-align:center; width:100%;">You have no notes yet. Create one!</p>
+      {% endif %}
+    </section>
+
+  </main>
 
 </body>
-
-<script src="{{ url_for('static', filename='jquery-3.7.1.min.js') }}"></script>
-<script src="{{ url_for('static', filename='jquery.validate.min.js') }}"></script>
-<script src="{{ url_for('static', filename='script.js') }}"></script>
-
 </html>
-
