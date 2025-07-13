@@ -42,7 +42,7 @@ def home():
             cur.close()
             con.close()
             return redirect(url_for("home"))
-
+    
         con = get_mysql_connection()
         cur = con.cursor()
         cur.execute("SELECT * FROM notes WHERE user_id=%s", (user_id,))
@@ -151,6 +151,8 @@ def logout():
     session.pop('user_id', None)
     return redirect(url_for('home'))
 
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=8080)
+
+# if __name__ == '__main__':
+#     app.run(debug=True)
