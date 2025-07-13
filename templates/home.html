@@ -3,77 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SkyNotes Home</title>
+  <title>Welcome to SkyNotes</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-  <!-- Header / Navbar -->
+  <!-- Navbar -->
   <header class="navbar">
     <h1>SkyNotes</h1>
-    <!-- <nav>
-      {% if current_user.is_authenticated %}
+    <nav>
+      {% if session.get('user_id') %}
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
         <a href="{{ url_for('logout') }}">Log‑Out</a>
       {% else %}
         <a href="{{ url_for('login') }}">Log‑In</a>
         <a href="{{ url_for('signup') }}">Sign‑Up</a>
       {% endif %}
-    </nav> -->
+    </nav>
   </header>
 
-  <main>
-
-    <!-- Flash messages -->
-    <!-- {% with messages = get_flashed_messages(with_categories=false) %}
-      {% if messages %}
-      <div class="flash-message">
-        {% for msg in messages %}
-          <p>{{ msg }}</p>
-        {% endfor %}
-      </div>
-      {% endif %}
-    {% endwith %} -->
-
-    <!-- Welcome Banner -->
+  <main class="login-main">
+    <!-- Public landing content -->
     <section class="welcome">
-      <p>
-        <strong>SkyNotes</strong> — your sleek, dark‑mode note hub.<br>
-        Access & organize anywhere.
+      <h2 style="font-size:1.5rem; color:#fafafa; margin-bottom:1rem;">
+        Welcome to SkyNotes
+      </h2>
+      <p style="color:#cfcfcf; margin-bottom:2rem;">
+        A sleek, dark‑mode note taking app inspired by Notion.<br>
+        Organize your thoughts, ideas, and tasks—all in one place.
       </p>
-      {% if not current_user.is_authenticated %}
-        <p>
-          <a href="{{ url_for('login') }}">Log in</a> or
-          <a href="{{ url_for('signup') }}">sign up</a> to get started.
-        </p>
-      {% endif %}
+      <div>
+        {% if session.get('user_id') %}
+          <a href="{{ url_for('dashboard') }}" class="btn">Go to Dashboard</a>
+        {% else %}
+          <a href="{{ url_for('signup') }}" class="btn">Get Started</a>
+          <a href="{{ url_for('login') }}" class="btn" style="background-color:#2d2d2d; margin-left:1rem;">Log In</a>
+        {% endif %}
+      </div>
     </section>
-
-    <!-- Create Note Button -->
-    {% if current_user.is_authenticated %}
-    <section style="text-align:center; margin-bottom:1rem;">
-      <a href="{{ url_for('add_note') }}" class="btn">+ New Note</a>
-    </section>
-    {% endif %}
-
-    <!-- Notes Grid -->
-    <section class="notes-wrapper">
-      {% for note in notes %}
-      <article class="note-container">
-        <h2>{{ note.title }}</h2>
-        <p>{{ note.content }}</p>
-        <form action="{{ url_for('delete_note', note_id=note.id) }}" method="POST" class="delete">
-          <button type="submit">
-            <img src="{{ url_for('static', filename='img/delete.png') }}" alt="Delete">
-          </button>
-        </form>
-      </article>
-      {% endfor %}
-
-      <!-- {% if notes|length == 0 and current_user.is_authenticated %}
-        <p style="color:#bbb; text-align:center; width:100%;">No notes yet. Create one!</p>
-      {% endif %} -->
-    </section>
-
   </main>
 
 </body>
