@@ -13,7 +13,7 @@
     <h1>SkyNotes</h1>
     <nav>
       {% if session.get('user_id') %}
-        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('dashboard') }}">My Notes</a>
         <a href="{{ url_for('logout') }}">Log‑Out</a>
       {% else %}
         <a href="{{ url_for('login') }}">Log‑In</a>
@@ -25,19 +25,19 @@
   <main class="login-main">
     <!-- Public landing content -->
     <section class="welcome">
-      <h2 style="font-size:1.5rem; color:#fafafa; margin-bottom:1rem;">
+      <h2 style="font-size:2.5rem; color:#fafafa; margin-bottom:1.5rem; font-weight:300;">
         Welcome to SkyNotes
       </h2>
-      <p style="color:#cfcfcf; margin-bottom:2rem;">
-        A sleek, dark‑mode note taking app inspired by Notion.<br>
-        Organize your thoughts, ideas, and tasks—all in one place.
+      <p style="color:#cfcfcf; margin-bottom:3rem; font-size:1.1rem; max-width:600px; margin-left:auto; margin-right:auto;">
+        Your personal space for capturing ideas, organizing thoughts, and managing tasks.<br>
+        Clean, fast, and designed for focus.
       </p>
       <div>
         {% if session.get('user_id') %}
-          <a href="{{ url_for('dashboard') }}" class="btn">Go to Dashboard</a>
+          <a href="{{ url_for('dashboard') }}" class="btn-hero">View My Notes</a>
         {% else %}
-          <a href="{{ url_for('signup') }}" class="btn">Get Started</a>
-          <a href="{{ url_for('login') }}" class="btn" style="background-color:#2d2d2d; margin-left:1rem;">Log In</a>
+          <a href="{{ url_for('signup') }}" class="btn-hero">Get Started</a>
+          <a href="{{ url_for('login') }}" class="btn-hero-secondary">Log In</a>
         {% endif %}
       </div>
     </section>

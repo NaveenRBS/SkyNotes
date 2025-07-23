@@ -14,7 +14,7 @@
   <header class="navbar">
     <h1>SkyNotes</h1>
     <nav>
-      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('dashboard') }}">My Notes</a>
       <a href="{{ url_for('logout') }}">Log‑Out</a>
     </nav>
   </header>
@@ -32,10 +32,8 @@
       {% endif %}
     {% endwith %}
 
-    <!-- Add Note Button -->
-    <section style="text-align:center; margin: 1.5rem 0;">
-      <button id="add-popup" class="btn">+ New Note</button>
-    </section>
+    <!-- Floating Add Note Button -->
+    <button id="add-popup" class="btn">+ New Note</button>
 
     <!-- Popup Modal for Adding New Note -->
     <div class="popup-overlay newuser" style="display: none;">
